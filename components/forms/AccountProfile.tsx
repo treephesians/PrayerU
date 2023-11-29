@@ -16,6 +16,8 @@ import { ZodEffects } from 'zod';
 import { UserValidation } from '@/lib/validations/user';
 import * as z from "zod"
 import { Input } from "../ui/input";
+import Image from "next/image";
+import { ChangeEvent } from "react";
 
 interface Props {
     user:{
@@ -29,6 +31,9 @@ interface Props {
     btnTitle : string;
 }
 
+const handleImage = (e: ChangeEvent, fieldChange:(value:string) => void) => {
+  e.preventDefault
+}
 const AccountProfile = ({ user, btnTitle }: Props) => {
 
     const form = useForm({
@@ -49,15 +54,42 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
     return (
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} 
+          className="flex flex-col justify-start gap-1"
+          >
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Username</FormLabel>
-                  <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                <FormItem className="flex items-center gap-4">
+                  <FormLabel className="account-form_image-label">
+                    { field.value ? (
+                      <Image 
+                      src={field.value}
+                      alt="profile photo"
+                      width={96}
+                      height={96}
+                      priority
+                      className="rounded-full object-contain">
+                      </Image>
+                    ) : (
+                      <Image 
+                      src="/assets/profile.svg"
+                      alt="profile photo"
+                      width={24}
+                      height={24}
+                      className="object-contain">
+                      </Image>
+                    )}
+                  </FormLabel>
+                  <FormControl className="flex-1 text-base-semibold text-gray-200">
+                    <Input 
+                    type="file"
+                    accept="image/*"
+                    placeholder="Upload a Photo"
+                    className="account-form_image-input"
+                    onChange={(e) => handleImage(e, field.onChange)}
+                     />
                   </FormControl>
                   <FormDescription>
                     This is your public display name.
