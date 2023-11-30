@@ -18,6 +18,7 @@ import * as z from "zod"
 import { Input } from "../ui/input";
 import Image from "next/image";
 import { ChangeEvent } from "react";
+import { Textarea } from "../ui/textarea";
 
 interface Props {
     user:{
@@ -91,14 +92,76 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     onChange={(e) => handleImage(e, field.onChange)}
                      />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
+                  
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="flex flex-col w-full gap-3 ">
+                  <FormLabel className="text-base-semibold text-light-2">
+                    Name
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                    type="text"
+                    className="account-form_input no -focus"
+                    {...field}
+                     />
+                  </FormControl>
+                  
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem className="flex flex-col w-full gap-3 ">
+                  <FormLabel className="text-base-semibold text-light-2">
+                    User name
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                    type="text"
+                    className="account-form_input no -focus"
+                    {...field}
+                     />
+                  </FormControl>
+                  
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="bio"
+              render={({ field }) => (
+                <FormItem className="flex flex-col w-full gap-3">
+                  <FormLabel className="text-base-semibold text-light-2">
+                    Bio
+                  </FormLabel>
+                  <FormControl>
+                    <Textarea
+                    rows={10}
+                    className="account-form_input no -focus"
+                    {...field}
+                     />
+                  </FormControl>
+                  
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit" className="bg-primary-500">Submit</Button>
           </form>
         </Form>
       )
