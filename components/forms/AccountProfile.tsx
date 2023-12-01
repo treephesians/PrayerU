@@ -40,10 +40,10 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     const form = useForm({
         resolver : zodResolver(UserValidation),
         defaultValues : {
-            profile_photo :'',
-            name : '',
-            username : '',
-            bio : '',
+            profile_photo : user?.image || "",
+            name :  user?.name || "",
+            username :  user?.username || "",
+            bio :  user?.bio || "",
         }
     });
 
@@ -56,7 +56,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     return (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} 
-          className="flex flex-col justify-start gap-1"
+          className="flex flex-col justify-start gap-10"
           >
             <FormField
               control={form.control}
@@ -109,7 +109,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   <FormControl>
                     <Input
                     type="text"
-                    className="account-form_input no -focus"
+                    className="account-form_input no-focus"
                     {...field}
                      />
                   </FormControl>
@@ -130,7 +130,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   <FormControl>
                     <Input
                     type="text"
-                    className="account-form_input no -focus"
+                    className="account-form_input no-focus"
                     {...field}
                      />
                   </FormControl>
@@ -151,7 +151,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                   <FormControl>
                     <Textarea
                     rows={10}
-                    className="account-form_input no -focus"
+                    className="account-form_input no-focus"
                     {...field}
                      />
                   </FormControl>
