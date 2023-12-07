@@ -19,6 +19,8 @@ import { Input } from "../ui/input";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { Textarea } from "../ui/textarea";
+import { isBase64Image } from "@/lib/utils";
+import { userUploadThing } from '@/lib/uploadthing'
 
 interface Props {
     user:{
@@ -49,7 +51,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
       const fileReader = new FileReader();
 
-      if(e.target.files && e.target.files.length > 1){
+      if(e.target.files && e.target.files.length > 0){
         const file = e.target.files[0];
 
         setFiles(Array.from(e.target.files));
@@ -65,7 +67,11 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     function onSubmit(values: z.infer<typeof UserValidation>) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values)
+        const blob = values.profile_photo;
+        const hasImageChanged = isBase64Image(blob);
+        if(hasImageChanged){
+          const imgRes = 
+        }
     }
 
     return (
@@ -83,7 +89,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     { field.value ? (
                       <Image 
                       src={field.value}
-                      //src="/assets/profile.svg"
                       alt="profile_icon"
                       width={96}
                       height={96}
