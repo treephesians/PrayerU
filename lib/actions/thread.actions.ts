@@ -73,7 +73,7 @@ export async function fetchThreadById(id: string) {
     try{
         const thread = await Thread.findById(id)
         .populate({
-            path: 'auth',
+            path: 'author',
             model: User,
             select: "_id id name image"
         })
