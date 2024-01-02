@@ -14,6 +14,7 @@ interface Params {
     image: string,
     path: string;
 }
+
 export async function updateUser({
     userId,
     username,
@@ -74,6 +75,8 @@ export async function fetchUserPosts(userId: string) {
                 }
             }
         })
+        return threads
+        
     } catch (error: any) {
         throw new Error(`Failed to fetch user posts: ${error.message}`)
     }
