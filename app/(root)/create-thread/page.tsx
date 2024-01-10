@@ -12,7 +12,9 @@ async function Page() {
 
     // onboard하지 않은 user는 onboarding 페이지로 이동
     if(!userInfo?.onboarded) redirect('/onboarding');
+    
     return (
+
         <>
             <h1 className="head-text">Create Thread</h1>
             <PostThread userId={userInfo._id} />
