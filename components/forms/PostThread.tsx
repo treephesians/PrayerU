@@ -88,7 +88,7 @@ function PostThread({ userId }:{ userId: string}){
             />
 
             <Button type="submit" className="bg-primary-500">
-                Post Thread
+                Post Pray
             </Button>
         </form>
         </Form>
